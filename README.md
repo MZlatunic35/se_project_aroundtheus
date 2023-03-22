@@ -1,21 +1,25 @@
-# Project 3: Around The U.S.
+# Practicum Project 3: Around The U.S.
 
-### Overview  
+This is the third project from Practicum of the Web Development program. It was created using HTML and CSS, based on the Figma design layout. The web page is responsive, so it has been designed for both desktop and mobile devices. Photos have been optimized using "TinyPng" (https://tinypng.com/).
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+# Figma
+
+- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+
+## Project Features
+
+- HTML5
+- CSS
+- Flexbox
+- Grid Layout
+- Use of media queries for all elements to display properly on different screen resolutions
+- BEM
+- Use of psuedo-classes to for hover over functions
+
+## Plan on improving the project
+
+- Implemeting interactivity to the site, so users can add and remove photos, like photos of other users, and make a few minor adjustments to their own profile.
+
+# GitHub Page
+
+- [Link to the Github Page]https://github.com/MZlatunic35/se_project_aroundtheus
