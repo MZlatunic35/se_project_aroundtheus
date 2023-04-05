@@ -8,7 +8,6 @@
   background-color: rgba(0, 0, 0, .5);
   padding: 0 19px;
   display: none;
-  /* change to display: none; */
 }
 
 .modal__opened {
@@ -33,12 +32,18 @@
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
-  background-position: contain;
+  background: contain;
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
   cursor: pointer;
   padding: 0;
+  transition: 1s ease-in-out;
+}
+
+.modal__close:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .modal__heading {
@@ -55,7 +60,7 @@
   font-weight: 400;
 }
 
-.modal__form-title {
+.modal__input {
   font-size: 14px;
   line-height: 17px;
   padding: 0 0 14px 0;
@@ -66,16 +71,9 @@
   margin-bottom: 30px;
 }
 
-.modal__form-description {
-  font-size: 14px;
-  line-height: 17px;
-  padding: 0 0 14px 0;
-  border: 1px solid rgba(0, 0, 0, .2);
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
+.modal__input:last-of-type {
   margin-bottom: 48px;
-  }
+}
 
 .modal__button {
   font-size: 18px;
@@ -84,6 +82,13 @@
   color: #fff;
   border-radius: 2px;
   padding: 14px 0 18px 0;
+  cursor: pointer;
+  transition: 1s ease-in-out;
+}
+
+.modal__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 620px) {
@@ -109,7 +114,7 @@
     width: 238px;
   }
 
-  .modal__form-description {
+  .modal__input:last-of-type {
     margin-bottom: 45px;
   }
 
