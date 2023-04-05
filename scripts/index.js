@@ -25,18 +25,57 @@ const initialCards = [
   }
 ];
 
-console.log(initialCards);
-
 // Elements
 
 const profileEditButton = document.querySelector('#profile-edit-button');
 const profileEditModal = document.querySelector('#profile-edit-modal');
 const modalCloseButton = document.querySelector('#modal-close-button');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const modalTitleInput = document.querySelector('#modal-form-title');
+const modalDescriptionInput = document.querySelector('#modal-form-description');
+const profileEditForm = profileEditModal.querySelector('.modal__form');
+const cardListEl = document.querySelector('.card__list');
+const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
+
+// Functions
+
+function closePopup() {
+  profileEditModal.classList.remove("modal__opened");
+}
+
+function getCardElement(cardData) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector('.card__image');
+  const cardTitleEl = cardElement.querySelector('.card__title');
+  cardTitleEl.textContent = cardData.name;
+  cardImageEl.alt = cardTitleEl.textContent;
+  cardImageEl.src = cardData.link;
+  return cardElement;
+}
+
+// Event Handlers
+
+function handleProfileEditSubmit(e) {
+  e.preventDefault();
+  profileTitle.textContent = modalTitleInput.value;
+  profileDescription.textContent = modalDescriptionInput.value;
+  closePopup();
+}
+
+// Event Listeners
 
 profileEditButton.addEventListener('click', () => {
+  modalTitleInput.value = profileTitle.textContent;
+  modalDescriptionInput.value = profileDescription.textContent;
   profileEditModal.classList.add("modal__opened");
 });
 
-modalCloseButton.addEventListener('click', () => {
-  profileEditModal.classList.remove("modal__opened");
+modalCloseButton.addEventListener('click', closePopup);
+
+profileEditForm.addEventListener('submit', handleProfileEditSubmit);
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardListEl.append(cardElement);
 });
