@@ -38,7 +38,7 @@
   left: calc(100% + 5px);
   cursor: pointer;
   padding: 0;
-  transition: 1s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .modal__close:hover {
@@ -83,7 +83,8 @@
   border-radius: 2px;
   padding: 14px 0 18px 0;
   cursor: pointer;
-  transition: 1s ease-in-out;
+  transition: 0.3s ease-in-out;
+  border: none;
 }
 
 .modal__button:hover {
