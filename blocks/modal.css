@@ -25,6 +25,29 @@
   color: #000;
 }
 
+.modal__preview-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.modal__preview {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal__preview-footer {
+  align-self: flex-start;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400px;
+  font-size: 12px;
+}
+
 .modal__close {
   background-image: url(../images/Close.svg);
   border: none;
