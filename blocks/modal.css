@@ -12,6 +12,7 @@
 
 .modal__opened {
   display: flex;
+  justify-content: center;
 }
 
 .modal__container {
@@ -34,7 +35,7 @@
   row-gap: 10px;
 }
 
-.modal__preview {
+.modal__preview-image {
   max-width: 75vw;
   max-height: 75vh;
 }
@@ -44,7 +45,7 @@
   margin: 0;
   font-family: "Inter", sans-serif;
   font-style: normal;
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 12px;
 }
 
