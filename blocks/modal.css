@@ -8,11 +8,17 @@
   background-color: rgba(0, 0, 0, .5);
   padding: 0 19px;
   display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibilty 0s 0.6s, opacity 0.6s linear;
 }
 
 .modal__opened {
   display: flex;
   justify-content: center;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.6s, opacity 0.6s linear;
 }
 
 .modal__container {
@@ -33,6 +39,9 @@
   justify-content: center;
   align-items: center;
   row-gap: 10px;
+  background-color: transparent;
+  padding: 0;
+  color: #fff;
 }
 
 .modal__preview-image {
@@ -125,8 +134,17 @@
     left: calc(100% - 26px);
   }
 
+  #preview-close-button{
+      bottom: calc(100% + 5px);
+      left: calc(100% + 5px);
+  }
+
   .modal__container {
     padding: 25px 22px 25px 22px;
+  }
+
+  .modal__preview-container {
+    padding: 0;
   }
 
   .modal__heading {
