@@ -109,7 +109,7 @@ function handleAddCardSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   closePopup(addCardModal);
-  addCardModal.reset();
+  addCardForm.reset();
 }
 
 // Event Listeners
