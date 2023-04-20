@@ -10,7 +10,7 @@
   display: none;
   visibility: hidden;
   opacity: 0;
-  transition: visibilty 0s 0.6s, opacity 0.6s linear;
+  transition: visibility 0s 0.6s, opacity 0.6s linear;
 }
 
 .modal__opened {
@@ -65,7 +65,7 @@
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
-  background: contain;
+  background-size: contain;
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
