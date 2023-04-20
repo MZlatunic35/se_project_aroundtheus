@@ -1,86 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="This is the website of the Image Gallery of must-see areas in the U.S. This website combines the Adaptive Web Design and Working with Layouts.">
-  <meta name="author" content="Mirko Zlatunic">
-  <meta name="keywords" content="HTML and CSS, website, Sofware Engineer, Practicum Project, adaptive Web Design">
-  <title>Around the U.S.</title>
-  <link rel="stylesheet" href="./pages/index.css"/>
-  <link rel="shortcut icon" href="favicon.ico"/>
-</head>
-<body class="page">
-  <div class="page__content">
-    <header class="header page__section">
-      <img src="./images/Vector_white.svg" alt="Around the U.S. Logo" class="header__logo"/>
-    </header>
-    <main class="content">
-      <section class="profile page__section">
-        <img src="./images/jacques-cousteau.jpg" alt="Avatar" class="profile__image"/>
-        <div class="profile__info">
-          <h1 class="profile__title">Jacque Cousteau</h1>
-          <button type="button" class="profile__edit-button" id="profile-edit-button"></button>
-          <p class="profile__description">Explorer</p>
-        </div>
-        <button type="button" class="profile__add-button" id="profile-add-button"></button>
-      </section>
-      <section class="cards page__section">
-        <ul class="cards__list"></ul>
-      </section>
-    </main>
-    <footer class="footer page__section">
-      <p class="footer__text">© 2023 around the U.S.</p>
-  </footer>
-  </div>
-
-  <!-- Edit Modal -->
-  <div class="modal" id="profile-edit-modal">
-    <div class="modal__container">
-      <button class="modal__close"></button>
-      <h2 class="modal__heading">Edit profile</h2>
-      <form class="modal__form">
-        <input type="text" name="title" class="modal__input" id="edit-form-title" placeholder="Name" required/>
-        <input type="text" name="description" class="modal__input" id="edit-form-description" placeholder="About" required/>
-        <button type="submit" class="modal__button">Save</button>
-      </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is the website of the Image Gallery of must-see areas in the U.S. This website combines the Adaptive Web Design and Working with Layouts."
+    />
+    <meta name="author" content="Mirko Zlatunic" />
+    <meta
+      name="keywords"
+      content="HTML and CSS, website, Sofware Engineer, Practicum Project, adaptive Web Design"
+    />
+    <title>Around the U.S.</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+  </head>
+  <body class="page">
+    <div class="page__content">
+      <header class="header page__section">
+        <img
+          src="./images/Vector_white.svg"
+          alt="Around the U.S. Logo"
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile page__section">
+          <img
+            src="./images/jacques-cousteau.jpg"
+            alt="Avatar"
+            class="profile__image"
+          />
+          <div class="profile__info">
+            <h1 class="profile__title">Jacque Cousteau</h1>
+            <button
+              type="button"
+              class="profile__edit-button"
+              id="profile-edit-button"
+            ></button>
+            <p class="profile__description">Explorer</p>
+          </div>
+          <button
+            type="button"
+            class="profile__add-button"
+            id="profile-add-button"
+          ></button>
+        </section>
+        <section class="cards page__section">
+          <ul class="cards__list"></ul>
+        </section>
+      </main>
+      <footer class="footer page__section">
+        <p class="footer__text">© 2023 around the U.S.</p>
+      </footer>
     </div>
-  </div>
 
-   <!-- Add card modal -->
-  <div class="modal" id="add-card-modal">
-    <div class="modal__container">
-      <button class="modal__close"></button>
-      <h2 class="modal__heading">New Place</h2>
-      <form class="modal__form" id="add-profile-form">
-        <input type="text" name="title" class="modal__input modal__input_type_title" id="card-form-title" placeholder="Title" required/>
-        <input type="text" name="url" class="modal__input modal__input_type_url" id="card-form-description" placeholder="Image URL" required/>
-        <button type="submit" class="modal__button">Save</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Preview modal -->
-  <div class="modal" id="preview-modal">
-    <div class="modal__preview-container modal__container">
-      <button class="modal__close" id="preview-close-button"></button>
-      <img src="#" alt="" class="modal__preview-image">
-      <h2 class="modal__preview-footer"></h2>
-    </div>
-  </div>
-
-  <template id="card-template">
-    <li class="card">
-      <img src="" alt="" class="card__image"/>
-      <button type="button" class="card__delete-button"></button>
-      <div class="card__description">
-        <h2 class="card__title"></h2>
-        <button type="button" class="card__like-button"></button>
+    <!-- Edit Modal -->
+    <div class="modal" id="profile-edit-modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <h2 class="modal__heading">Edit profile</h2>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input"
+            id="edit-form-title"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="text"
+            name="description"
+            class="modal__input"
+            id="edit-form-description"
+            placeholder="About"
+            required
+          />
+          <button type="submit" class="modal__button">Save</button>
+        </form>
       </div>
-    </li>
-  </template>
+    </div>
 
-  <script src="./scripts/index.js" defer></script>
-</body>
+    <!-- Add card modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form" id="add-profile-form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__input_type_title"
+            id="card-form-title"
+            placeholder="Title"
+            required
+          />
+          <input
+            type="text"
+            name="url"
+            class="modal__input modal__input_type_url"
+            id="card-form-description"
+            placeholder="Image URL"
+            required
+          />
+          <button type="submit" class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Preview modal -->
+    <div class="modal" id="preview-modal">
+      <div class="modal__preview-container modal__container">
+        <button class="modal__close" id="preview-close-button"></button>
+        <img src="#" alt="" class="modal__preview-image" />
+        <h2 class="modal__preview-footer"></h2>
+      </div>
+    </div>
+
+    <template id="card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <button type="button" class="card__delete-button"></button>
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
+
+    <script src="./scripts/index.js" defer></script>
+  </body>
 </html>
