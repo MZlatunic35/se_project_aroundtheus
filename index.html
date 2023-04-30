@@ -69,16 +69,22 @@
             class="modal__input"
             id="edit-form-title"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__error" id="edit-form-title-error"></span>
           <input
             type="text"
             name="description"
             class="modal__input"
             id="edit-form-description"
             placeholder="About"
+            minlength="2"
+            maxlength="200"
             required
           />
+          <span class="modal__error" id="edit-form-description-error"></span>
           <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
@@ -96,8 +102,11 @@
             class="modal__input modal__input_type_title"
             id="card-form-title"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span class="modal__error" id="card-form-title-error"></span>
           <input
             type="url"
             name="url"
@@ -106,7 +115,14 @@
             placeholder="Image URL"
             required
           />
-          <button type="submit" class="modal__button">Save</button>
+          <span class="modal__error" id="card-form-description-error"></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -131,6 +147,8 @@
       </li>
     </template>
 
+    <!-- index.js -->
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
