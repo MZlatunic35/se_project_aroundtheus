@@ -102,11 +102,7 @@
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
-  margin-bottom: 30px;
-}
-
-.modal__input:last-of-type {
-  margin-bottom: 48px;
+  width: 100%;
 }
 
 .modal__input_type_error {
@@ -123,6 +119,7 @@
   cursor: pointer;
   transition: 0.3s ease-in-out;
   border: none;
+  margin-top: 18px;
 }
 
 .modal__button:hover {
@@ -145,10 +142,15 @@
   font-size: 12px;
   line-height: 15px;
   color: #ff0000;
+  left: 0;
   position: absolute;
-  top: calc(100% + 10px);
-  margin: 0;
+  top: calc(100% + 5px);
   transition: opacity 0.3s;
+}
+
+.modal__label {
+  position: relative;
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 620px) {
