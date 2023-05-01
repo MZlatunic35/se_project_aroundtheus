@@ -122,19 +122,19 @@
   margin-top: 18px;
 }
 
+.modal__button:disabled {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  color: #000000;
+  opacity: 0.2;
+}
+
+.modal__button:disabled:hover {
+  cursor: default;
+}
+
 .modal__button:hover {
   cursor: pointer;
-  opacity: 0.8;
-}
-
-.modal__button_disabled {
-  opacity: 0.2;
-  border: 1px solid #000000;
-  background-color: #e5e5e5;
-  color: #000000;
-}
-
-.modal__button_disabled:hover {
   opacity: 0.8;
 }
 
