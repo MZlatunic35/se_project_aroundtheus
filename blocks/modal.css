@@ -145,7 +145,7 @@
   left: 0;
   position: absolute;
   top: calc(100% + 5px);
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
 }
 
 .modal__label {
