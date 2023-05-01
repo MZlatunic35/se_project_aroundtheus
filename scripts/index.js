@@ -54,15 +54,15 @@ const previewFooter = document.querySelector(".modal__preview-footer");
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", EscKeyHandler);
+  document.addEventListener("keydown", closeModalWithEsc);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", EscKeyHandler);
+  document.removeEventListener("keydown", closeModalWithEsc);
 }
 
-const clickOutPopup = (modal) => {
+const addclickOutPopupListener = (modal) => {
   modal.addEventListener("mousedown", function (e) {
     if (e.target === e.currentTarget) {
       closePopup(modal);
@@ -70,11 +70,11 @@ const clickOutPopup = (modal) => {
   });
 };
 
-clickOutPopup(profileEditModal);
+addclickOutPopupListener(profileEditModal);
 
-clickOutPopup(addCardModal);
+addclickOutPopupListener(addCardModal);
 
-clickOutPopup(previewImageModal);
+addclickOutPopupListener(previewImageModal);
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -127,20 +127,16 @@ function handleAddCardSubmit(e) {
   closePopup(addCardModal);
   addCardForm.reset();
   const inputEls = [...addCardForm.querySelectorAll(config.inputSelector)];
-  const submitButton = addCardForm.querySelector(".modal__button");
-  submitButton.classList.add(config.inactiveButtonClass);
-  submitButton.disabled = true;
-  toggleButtonState(inputEls, submitButton, config);
+  const submitButton = addCardForm.querySelector(config.submitButtonSelector);
+  toggleButtonState(inputEls, submitButton, config.inactiveButtonClass);
 }
 
-const EscKeyHandler = (e) => {
+const closeModalWithEsc = (e) => {
   if (e.key === "Escape") {
     const activeModal = document.querySelector(".modal_opened");
     closePopup(activeModal);
   }
 };
-
-previewImageModal.removeEventListener("keydown", EscKeyHandler);
 
 // Event Listeners
 
