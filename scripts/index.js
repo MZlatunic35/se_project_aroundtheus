@@ -126,13 +126,14 @@ function handleAddCardSubmit(e) {
   addCardForm.reset();
 }
 
-function EscKeyHandler(e) {
+const EscKeyHandler = (e) => {
   if (e.key === "Escape") {
-    closePopup(profileEditModal);
+    const activeModal = document.querySelector(".modal_opened");
+    closePopup(activeModal);
   }
-}
+};
 
-profileEditModal.removeEventListener("keydown", EscKeyHandler);
+previewImageModal.removeEventListener("keydown", EscKeyHandler);
 
 // Event Listeners
 
