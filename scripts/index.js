@@ -126,6 +126,11 @@ function handleAddCardSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(addCardModal);
   addCardForm.reset();
+  const inputEls = [...addCardForm.querySelectorAll(config.inputSelector)];
+  const submitButton = addCardForm.querySelector(".modal__button");
+  submitButton.classList.add(config.inactiveButtonClass);
+  submitButton.disabled = true;
+  toggleButtonState(inputEls, submitButton, config);
 }
 
 const EscKeyHandler = (e) => {
