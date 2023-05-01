@@ -54,10 +54,12 @@ const previewFooter = document.querySelector(".modal__preview-footer");
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", EscKeyHandler);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", EscKeyHandler);
 }
 
 const clickOutPopup = (modal) => {
