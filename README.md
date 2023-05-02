@@ -23,4 +23,4 @@ This is the third project from Practicum of the Web Development program. It was 
 
 # GitHub Page
 
-- [Link to the Github Page](https://mzlatunic35.github.io/se_project_aroundtheus/)
+- [Link to the Github Page](https://mirkozlatunic.github.io/se_project_aroundtheus/)
