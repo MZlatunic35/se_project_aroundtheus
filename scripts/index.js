@@ -62,7 +62,7 @@ function closePopup(modal) {
   document.removeEventListener("keydown", closeModalWithEsc);
 }
 
-const addclickOutPopupListener = (modal) => {
+const addClickOutPopupListener = (modal) => {
   modal.addEventListener("mousedown", function (e) {
     if (e.target === e.currentTarget) {
       closePopup(modal);
@@ -70,11 +70,11 @@ const addclickOutPopupListener = (modal) => {
   });
 };
 
-addclickOutPopupListener(profileEditModal);
+addClickOutPopupListener(profileEditModal);
 
-addclickOutPopupListener(addCardModal);
+addClickOutPopupListener(addCardModal);
 
-addclickOutPopupListener(previewImageModal);
+addClickOutPopupListener(previewImageModal);
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
@@ -128,7 +128,7 @@ function handleAddCardSubmit(e) {
   addCardForm.reset();
   const inputEls = [...addCardForm.querySelectorAll(config.inputSelector)];
   const submitButton = addCardForm.querySelector(config.submitButtonSelector);
-  toggleButtonState(inputEls, submitButton, config.inactiveButtonClass);
+  toggleButtonState(inputEls, submitButton, config);
 }
 
 const closeModalWithEsc = (e) => {
