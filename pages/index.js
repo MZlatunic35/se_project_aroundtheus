@@ -91,11 +91,6 @@ function handleAddCardSubmit(e) {
   renderCard({ name, link }, cardListEl);
   closePopup(addCardModal);
   addCardForm.reset();
-
-  const inputEls = [...addCardForm.querySelectorAll(config.inputSelector)];
-  const submitButton = addCardForm.querySelector(config.submitButtonSelector);
-
-  toggleButtonState(inputEls, submitButton, config);
 }
 
 // Event Listeners
@@ -113,6 +108,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // add new card button
 profileAddButton.addEventListener("click", () => {
+  addFormValidator.resetValidation();
   openPopup(addCardModal);
 });
 
