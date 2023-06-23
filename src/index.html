@@ -14,14 +14,13 @@
       content="HTML and CSS, website, Sofware Engineer, Practicum Project, adaptive Web Design"
     />
     <title>Around the U.S.</title>
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/Vector_white.svg"
+          src="<%=require('./images/Vector_white.svg')%>"
           alt="Around the U.S. Logo"
           class="header__logo"
         />
@@ -29,7 +28,7 @@
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar"
             class="profile__image"
           />
@@ -148,8 +147,5 @@
         </div>
       </li>
     </template>
-
-    <!-- index.js -->
-    <script src="./pages/index.js" type="module" defer></script>
   </body>
 </html>

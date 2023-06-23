@@ -1,6 +1,9 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { openPopup, closePopup, closeModalWithEsc } from "../utils/utils.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import "../pages/index.css";
 
 const initialCards = [
   {
@@ -142,3 +145,28 @@ const editFormValidator = new FormValidator(
 editFormValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
+
+const defaultDestinationSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  destinations
+);
+
+defaultDestinationSection.renderItems();
+
+const userInfo = new UserInfo(profileNameSelector, profileProfessionSelector);
+
+const editProfileForm = new PopupWithForm("#editProfile-modal", (values) => {
+  userInfo.setUserInfo(values.name, values.profession);
+});
+
+openEditButton.addEventListener("click", () => {
+  editFormValidator.toggleButtonState();
+  const profileData = userInfo.getUserInfo();
+
+  nameInput.value = profileData.name;
+  professionInput.value = profileData.profession;
+  editProfileForm.openModal();
+});
