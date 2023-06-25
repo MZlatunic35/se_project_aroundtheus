@@ -147,6 +147,7 @@ editFormValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
+const cardListSelector = ".cards__list";
 const cardSection = new Section(
   {
     data: [],
@@ -155,22 +156,17 @@ const cardSection = new Section(
   cardListSelector
 );
 
-function renderCard(cardData) {
-  const cardImage = createCard(cardData);
-  cardSection.prependItem(cardImage);
-}
+const userInfo = new UserInfo();
 
-const userInfo = new UserInfo(profileNameSelector, profileProfessionSelector);
+// const editProfileForm = new PopupWithForm("#editProfile-modal", (values) => {
+//   userInfo.setUserInfo(values.name, values.profession);
+// });
 
-const editProfileForm = new PopupWithForm("#editProfile-modal", (values) => {
-  userInfo.setUserInfo(values.name, values.profession);
-});
+// openEditButton.addEventListener("click", () => {
+//   editFormValidator.toggleButtonState();
+//   const profileData = userInfo.getUserInfo();
 
-openEditButton.addEventListener("click", () => {
-  editFormValidator.toggleButtonState();
-  const profileData = userInfo.getUserInfo();
-
-  nameInput.value = profileData.name;
-  professionInput.value = profileData.profession;
-  editProfileForm.openModal();
-});
+//   nameInput.value = profileData.name;
+//   professionInput.value = profileData.profession;
+//   editProfileForm.openModal();
+// });

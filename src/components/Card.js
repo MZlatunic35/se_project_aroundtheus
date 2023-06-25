@@ -1,4 +1,4 @@
-import { openPopup } from "../utils/utils.js";
+import Popup from "./Popup.js";
 import {
   previewImage,
   previewFooter,
@@ -46,7 +46,7 @@ export default class Card {
     previewImage.src = this._link;
     previewImage.alt = this._name;
     previewFooter.textContent = this._name;
-    openPopup(previewImageModal);
+    open(previewImageModal);
   }
 
   _getTemplate() {
