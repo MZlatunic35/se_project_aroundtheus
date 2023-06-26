@@ -100,7 +100,7 @@ function handleAddCardSubmit(e) {
 
 // Event Listeners
 const profilePopup = new PopupWithForm(
-  "#edit-profile-modal",
+  "#profile-edit-modal",
   handleProfileEditSubmit
 );
 
@@ -116,7 +116,7 @@ profileModalCloseButton.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 // add new card button
-const addCardPopup = new PopupWithForm("#add-modal", handleAddCardSubmit);
+const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
 
 profileAddButton.addEventListener("click", () => {
   addFormValidator.resetValidation();
