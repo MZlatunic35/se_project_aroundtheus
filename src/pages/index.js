@@ -155,6 +155,17 @@ editFormValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
+function createCard({ name, link }) {
+  const cardElement = new Card(
+    { name, link },
+    "#card-template",
+    ({ name, link }) => {
+      previewImagePopup.open({ name, link });
+    }
+  );
+  return cardElement.getView();
+}
+
 const cardListSelector = ".cards__list";
 const cardListSection = new Section(
   {
