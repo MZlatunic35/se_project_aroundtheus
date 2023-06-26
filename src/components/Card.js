@@ -25,8 +25,8 @@ export default class Card {
         this._handleDeleteCard();
       });
 
-    this._cardImageEl.addEventListener("click", (e) => {
-      this._handlePreviewImage(e);
+    this._cardImageEl.addEventListener("click", () => {
+      this._handleImageClick({ name: this._name, link: this._link });
     });
   }
 
@@ -39,14 +39,6 @@ export default class Card {
   _handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-
-  _handlePreviewImage(e) {
-    e.preventDefault();
-    previewImage.src = this._link;
-    previewImage.alt = this._name;
-    previewFooter.textContent = this._name;
-    open(previewImageModal);
   }
 
   _getTemplate() {
