@@ -75,7 +75,9 @@ addClickOutPopupListener(addCardModal);
 addClickOutPopupListener(previewImageModal);
 
 function renderCard(cardData, wrapper) {
-  const card = new Card(cardData, "#card-template");
+  const card = new Card(cardData, "#card-template", ({ name, link }) => {
+    previewImagePopup.open({ name, link });
+  });
   wrapper.prepend(card.getView());
 }
 
