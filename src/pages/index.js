@@ -63,7 +63,7 @@ const previewFooter = document.querySelector(".modal__preview-footer");
 const addClickOutPopupListener = (modal) => {
   modal.addEventListener("mousedown", function (e) {
     if (e.target === e.currentTarget) {
-      closePopup(modal);
+      previewImagePopup.close();
     }
   });
 };
@@ -95,7 +95,7 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  previewImagePopup.close();
+  addCardPopup.close();
   addCardForm.reset();
 }
 
