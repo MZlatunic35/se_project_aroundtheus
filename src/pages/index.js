@@ -129,7 +129,9 @@ addCardModalCloseButton.addEventListener("click", () => {
 });
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-const previewImagePopup = new PopupWithImage("#preview-modal");
+const previewImagePopup = new PopupWithImage({
+  popupSelector: "#preview-modal",
+});
 previewModalCloseButton.addEventListener("click", () => {
   previewImagePopup.close();
 });
