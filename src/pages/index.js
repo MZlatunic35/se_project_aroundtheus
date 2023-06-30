@@ -30,10 +30,18 @@ import {
   formValidationConfig,
 } from "../utils/constants.js";
 
-const previewImagePopup = new PopupWithImage({
-  popupSelector: "#preview-modal",
-});
-previewImagePopup.setEventListeners();
+// New Card
+
+function createCard({ name, link }, wrapper) {
+  const cardElement = new Card(
+    { name, link },
+    "#card-template",
+    ({ name, link }) => {
+      previewImagePopup.open({ name, link });
+    }
+  );
+  wrapper.prepend(cardElement.getView());
+}
 
 function renderCard(cardData, wrapper) {
   const card = new Card(cardData, "#card-template", ({ name, link }) => {
@@ -42,7 +50,14 @@ function renderCard(cardData, wrapper) {
   wrapper.prepend(card.getView());
 }
 
-// Event Handlers
+// Preview Popup
+
+const previewImagePopup = new PopupWithImage({
+  popupSelector: "#preview-modal",
+});
+previewImagePopup.setEventListeners();
+
+//Profile Popup
 
 const newUser = new UserInfo(".profile__title", ".profile__description");
 
@@ -51,7 +66,6 @@ function handleProfileEditSubmit({ title, description }) {
   profilePopup.close();
 }
 
-// Event Listeners
 const profilePopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -59,12 +73,16 @@ const profilePopup = new PopupWithForm(
 profilePopup.setEventListener();
 
 profileEditButton.addEventListener("click", () => {
+  const userData = newUser.getUserInfo();
+  modalTitleInput.value = userData.name;
+  modalDescriptionInput.value = userData.info;
   profilePopup.open();
 });
 
-// add new card button
+// Add Card Popup
+
 const addCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
-  renderCard(inputValues, cardListEl);
+  createCard(inputValues, cardListEl);
   addCardPopup.close();
 });
 addCardPopup.setEventListener();
@@ -87,16 +105,7 @@ editFormValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
-function createCard({ name, link }) {
-  const cardElement = new Card(
-    { name, link },
-    "#card-template",
-    ({ name, link }) => {
-      previewImagePopup.open({ name, link });
-    }
-  );
-  return cardElement.getView();
-}
+//Section
 
 const cardListSelector = ".cards__list";
 const cardListSection = new Section(
