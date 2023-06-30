@@ -33,6 +33,7 @@ import {
 const previewImagePopup = new PopupWithImage({
   popupSelector: "#preview-modal",
 });
+previewImagePopup.setEventListeners();
 
 function renderCard(cardData, wrapper) {
   const card = new Card(cardData, "#card-template", ({ name, link }) => {
@@ -50,13 +51,6 @@ function handleProfileEditSubmit({ title, description }) {
   profilePopup.close();
 }
 
-function handleAddCardSubmit({ title, url }) {
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name, link }, cardListEl);
-  addCardPopup.close();
-}
-
 // Event Listeners
 const profilePopup = new PopupWithForm(
   "#profile-edit-modal",
@@ -69,7 +63,10 @@ profileEditButton.addEventListener("click", () => {
 });
 
 // add new card button
-const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
+const addCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
+  renderCard(inputValues, cardListEl);
+  addCardPopup.close();
+});
 addCardPopup.setEventListener();
 
 profileAddButton.addEventListener("click", () => {
