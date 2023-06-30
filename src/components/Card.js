@@ -1,10 +1,3 @@
-import Popup from "./Popup.js";
-import {
-  previewImage,
-  previewFooter,
-  previewImageModal,
-} from "../pages/index.js";
-
 export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
