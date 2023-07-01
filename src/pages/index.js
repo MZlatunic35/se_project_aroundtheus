@@ -32,7 +32,7 @@ import {
 
 // New Card
 
-function createCard({ name, link }, wrapper) {
+function createCard({ name, link }) {
   const cardElement = new Card(
     { name, link },
     "#card-template",
@@ -40,14 +40,7 @@ function createCard({ name, link }, wrapper) {
       previewImagePopup.open({ name, link });
     }
   );
-  wrapper.prepend(cardElement.getView());
-}
-
-function renderCard(cardData, wrapper) {
-  const card = new Card(cardData, "#card-template", ({ name, link }) => {
-    previewImagePopup.open({ name, link });
-  });
-  wrapper.prepend(card.getView());
+  return cardElement.getView();
 }
 
 // Preview Popup
