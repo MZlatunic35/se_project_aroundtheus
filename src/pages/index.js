@@ -68,21 +68,8 @@ profilePopup.setEventListener();
 profileEditButton.addEventListener("click", () => {
   const userData = newUser.getUserInfo();
   modalTitleInput.value = userData.name;
-  modalDescriptionInput.value = userData.info;
+  modalDescriptionInput.value = userData.profession;
   profilePopup.open();
-});
-
-// Add Card Popup
-
-const addCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
-  createCard(inputValues, cardListEl);
-  addCardPopup.close();
-});
-addCardPopup.setEventListener();
-
-profileAddButton.addEventListener("click", () => {
-  addFormValidator.resetValidation();
-  addCardPopup.open();
 });
 
 // Validation
@@ -113,3 +100,17 @@ const cardListSection = new Section(
 );
 
 cardListSection.renderItems();
+
+// Add Card Popup
+
+const addCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
+  const newCard = createCard(inputValues, cardListEl);
+  cardListSection.prependItem(newCard);
+  addCardPopup.close();
+});
+addCardPopup.setEventListener();
+
+profileAddButton.addEventListener("click", () => {
+  addFormValidator.resetValidation();
+  addCardPopup.open();
+});
