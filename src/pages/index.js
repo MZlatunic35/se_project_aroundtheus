@@ -29,8 +29,15 @@ import {
   previewFooter,
   formValidationConfig,
 } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
+// =============================================================================
+// API
+// =============================================================================
+
+// =============================================================================
 // New Card
+// =============================================================================
 
 function createCard({ name, link }) {
   const cardElement = new Card(
@@ -43,14 +50,18 @@ function createCard({ name, link }) {
   return cardElement.getView();
 }
 
+// =============================================================================
 // Preview Popup
+// =============================================================================
 
 const previewImagePopup = new PopupWithImage({
   popupSelector: "#preview-modal",
 });
 previewImagePopup.setEventListeners();
 
-//Profile Popup
+// =============================================================================
+// Profile Popup
+// =============================================================================
 
 const newUser = new UserInfo(".profile__title", ".profile__description");
 
@@ -72,7 +83,9 @@ profileEditButton.addEventListener("click", () => {
   profilePopup.open();
 });
 
+// =============================================================================
 // Validation
+// =============================================================================
 
 const addFormValidator = new FormValidator(formValidationConfig, addCardForm);
 addFormValidator.enableValidation();
@@ -85,7 +98,9 @@ editFormValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
-//Section
+// =============================================================================
+// Section
+// =============================================================================
 
 const cardListSelector = ".cards__list";
 const cardListSection = new Section(
@@ -101,7 +116,9 @@ const cardListSection = new Section(
 
 cardListSection.renderItems();
 
+// =============================================================================
 // Add Card Popup
+// =============================================================================
 
 const addCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
   const newCard = createCard(inputValues, cardListEl);
