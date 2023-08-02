@@ -35,6 +35,44 @@ import Api from "../components/Api.js";
 // API
 // =============================================================================
 
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getInitialCards()
+  .then((result) => {
+    const initialCards = {};
+    for (let i = 0; i <= result.length; i++) {
+      initialCards[i] = { name: result[i].name, link: result[i].link };
+    }
+    const cardList = new Section(
+      {
+        items: initialCards,
+        renderer: renderCard,
+      },
+      ".card__list"
+    );
+
+    cardList.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+api
+  .getUserInfo()
+  .then((result) => {
+    userInfo.setUserInfo({ name: result.name, about: result.about });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 // =============================================================================
 // New Card
 // =============================================================================

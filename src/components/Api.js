@@ -1,33 +1,27 @@
-export class Api {
+export default class Api {
   constructor(options) {
     this._url = options.url;
     this._header = options.header;
   }
 
   getUserInfo() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-      headers: {
-        authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-      },
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      // if the server returns an error, reject the promise
       return Promise.reject(`Error: ${res.status}`);
     });
   }
 
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-      },
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      // if the server returns an error, reject the promise
       return Promise.reject(`Error: ${res.status}`);
     });
   }
@@ -109,7 +103,6 @@ export class Api {
       if (res.ok) {
         return res.json();
       }
-      // if the server returns an error, reject the promise
       return Promise.reject(`Error: ${res.status}`);
     });
   }
@@ -128,13 +121,3 @@ const api = new Api({
 // Pass the array of function calls for getting user information and t
 // he list of cards to Promise.all() as a parameter.
 /* ------------------------------------ - ----------------------------------- */
-
-fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-  headers: {
-    authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    console.log(result);
-  });
