@@ -1,7 +1,7 @@
 export default class Api {
   constructor(options) {
     this._url = options.url;
-    this._header = options.header;
+    this._headers = options.headers;
   }
 
   getUserInfo() {
@@ -26,29 +26,23 @@ export default class Api {
     });
   }
 
-  editProfile() {
-    fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+  editProfile(inputValues) {
+    fetch(`${this._url}/users.me`, {
       method: "PATCH",
-      headers: {
-        authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
-        name: "Marie Skłodowska Curie",
-        about: "Physicist and Chemist",
+        name: inputValues.name,
+        about: inputValues.profession,
       }),
     });
   }
-  addNewCard() {
-    fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+  addNewCard(cardData) {
+    fetch(`${this._url}/cards`, {
       method: "POST",
-      headers: {
-        authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
-        name: "Marie Skłodowska Curie",
-        link: "Physicist and Chemist",
+        name: cardData.name,
+        link: cardData.link,
       }),
     });
   }

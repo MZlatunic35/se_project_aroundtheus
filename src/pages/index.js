@@ -45,11 +45,7 @@ const api = new Api({
 
 api
   .getInitialCards()
-  .then((result) => {
-    const initialCards = {};
-    for (let i = 0; i <= result.length; i++) {
-      initialCards[i] = { name: result[i].name, link: result[i].link };
-    }
+  .then((initialCards) => {
     const cardList = new Section(
       {
         items: initialCards,
