@@ -1,21 +1,23 @@
-import PopupDeleteCard from "./PopupDeleteCard.js";
-
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link },
+    cardSelector,
+    handleImageClick,
+    handleDeleteClick,
+    userID
+  ) {
     this._name = name;
     this._link = link;
     this._owner = data.owner;
     this._id = data._id;
+    this.cardID = data._id;
+    this._userID = userID;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _setEventListeners() {
-    const deleteCardPopup = new PopupDeleteCard(
-      "#delete-card-modal",
-      this._cardElement
-    );
-
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
@@ -31,13 +33,9 @@ export default class Card {
       this._handleImageClick({ name: this._name, link: this._link });
     });
 
-    if (this._owner._id === "95502108632f16a0ea31da1b") {
-      this._deleteButton.addEventListener("click", () => {
-        deleteCardPopup.open();
-      });
-    } else {
-      console.log("you're not the owner");
-    }
+    this._deleteButton.addEventListener("click", () => {
+      this._handleDeleteClick(this.getView());
+    });
   }
 
   _handleLikeIcon() {
@@ -70,6 +68,9 @@ export default class Card {
 
     this._setEventListeners();
 
+    if (this._owner._id != this._userID) {
+      this._deleteButton.remove();
+    }
     return this._cardElement;
   }
 }

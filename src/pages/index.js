@@ -30,6 +30,7 @@ import {
   formValidationConfig,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
+import PopupDeleteCard from "../components/PopupDeleteCard.js";
 
 // =============================================================================
 // API
@@ -64,6 +65,7 @@ api
   .getUserInfo()
   .then((result) => {
     userInfo.setUserInfo({ name: result.name, about: result.about });
+    userID = user._id;
   })
   .catch((err) => {
     console.error(err);
@@ -78,7 +80,11 @@ function createCard({ name, link }) {
     { name, link },
     "#card-template",
     ({ name, link }) => {
-      previewImagePopup.open({ name, link });
+      previewImagePopup.open(
+        { name, link },
+        (cardElement) => deleteCardPopup.open(cardElement),
+        userID
+      );
     }
   );
   return cardElement.getView();
@@ -165,3 +171,9 @@ profileAddButton.addEventListener("click", () => {
   addFormValidator.resetValidation();
   addCardPopup.open();
 });
+
+// =============================================================================
+// Delete Card Popup
+// =============================================================================
+
+const deleteCardPopup = new PopupDeleteCard("#delele-card-modal");

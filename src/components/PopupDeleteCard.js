@@ -1,29 +1,33 @@
 import Popup from "./Popup.js";
 
 export default class PopupDeleteCard extends Popup {
-  constructor(popupSelector, cardElement) {
+  constructor(popupSelector) {
     super(popupSelector);
     this._popupSubmitButton = this._popupElement.querySelector(
       ".modal__button-delete"
     );
-    this._card = cardElement;
   }
 
-  _handleSubmitButton = () => {
-    this._card.remove();
-    this.close();
+  _handleSubmitButton = (cardElement) => {
+    cardElement.remove();
+    this.close(cardElement);
   };
 
-  _setEventListeners() {
+  _setEventListeners(cardElement) {
     super._setEventListeners();
-    this._popupSubmitButton.addEventListener("click", this._handleSubmitButton);
+    this._popupSubmitButton.addEventListener("click", this._handleSubmitButton(cardElement));
+  }
+
+  open(cardElement) {
+    super.open();
+    this._setEventListeners(cardElement);
   }
 
   close() {
     super.close();
     this._popupSubmitButton.removeEventListener(
       "click",
-      this._handleSubmitButton
+      this._handleSubmitButton(cardElement)
     );
   }
 }
