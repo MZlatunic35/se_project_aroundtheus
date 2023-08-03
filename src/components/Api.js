@@ -27,37 +27,45 @@ export default class Api {
   }
 
   editProfile(inputValues) {
-    fetch(`${this._url}/users.me`, {
+    return fetch(`${this._url}/users.me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: inputValues.name,
         about: inputValues.profession,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   addNewCard(cardData) {
-    fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: cardData.name,
         link: cardData.link,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
-  deleteCard() {
-    fetch("https://around-api.en.tripleten-services.com/v1/cards/${cardID}", {
+  deleteCard(cardID) {
+    return fetch(`${this._url}/cards/${cardID}`, {
       method: "DELETE",
-      headers: {
-        authorization: "90cd17e6-c5e4-4b6c-8c3c-48c1c89f20fe",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "Marie Skłodowska Curie",
-        link: "Physicist and Chemist",
-      }),
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 

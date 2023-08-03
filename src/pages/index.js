@@ -82,10 +82,14 @@ function createCard({ name, link }) {
     ({ name, link }) => {
       previewImagePopup.open(
         { name, link },
-        (cardElement) => deleteCardPopup.open(cardElement),
-        userID
+        (cardID, cardElement) => deleteCardPopup.open(),
+        deleteCardPopup.setSubmitAction(
+          api.deleteCard(CardID),
+          cardElement.remove()
+        )
       );
-    }
+    },
+    userID
   );
   return cardElement.getView();
 }
