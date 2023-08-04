@@ -31,7 +31,15 @@
             src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Avatar"
             class="profile__image"
+            id="profile-avatar"
           />
+          <div class="profile__image-overlay">
+            <img
+              src="<%=require('./images/edit-profile-button.svg')%>"
+              alt="edit-avatar"
+              class="profile__image-edit-icon"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacque Cousteau</h1>
             <button
@@ -186,12 +194,39 @@
       </div>
     </div>
 
+    <!-- edit avatar modal -->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="edit-avatar-form" name="avatar-edit-form">
+          <input
+            type="url"
+            name="link"
+            id="add-avatar-url"
+            class="modal__form-input modal__form-input-URL"
+            placeholder="Image URL"
+            required
+          />
+          <span class="modal__input-error" id="add-avatar-url-error"
+            >Please enter a web address.</span
+          >
+          <button class="modal__button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Card Template -->
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
         <button type="button" class="card__delete-button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
+          <div class="card__like-button">
+            <button class="card__like-button" type="button"></button>
+            <h3 class="card__like-number"></h3>
+          </div>
           <button type="button" class="card__like-button"></button>
         </div>
       </li>

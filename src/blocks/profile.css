@@ -19,7 +19,7 @@
   height: 24px;
   width: 24px;
   grid-area: button;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   transition: 0.3s ease-in-out;
 }
 
@@ -33,7 +33,7 @@
   height: 50px;
   width: 150px;
   margin-left: auto;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   border-radius: 2px;
   transition: 0.3s ease-in-out;
 }
@@ -75,6 +75,32 @@
   object-fit: cover;
   background-position: center;
   margin-right: 24px;
+}
+
+.profile__image-overlay {
+  position: absolute;
+  opacity: 0;
+  height: 120px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.25s;
+}
+
+.profile__image-edit-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.profile__image-overlay:hover {
+  opacity: 1;
+}
+
+.profile__image:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 880px) {

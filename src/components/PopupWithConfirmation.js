@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export default class PopupDeleteCard extends Popup {
+export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._popupSubmitButton = this._popupElement.querySelector(
@@ -11,10 +11,6 @@ export default class PopupDeleteCard extends Popup {
   setSubmitAction(callBack) {
     this._handleSubmit = callBack;
   }
-
-  _handleSubmit = () => {
-    this.close();
-  };
 
   _setEventListeners() {
     super._setEventListeners();
