@@ -1,6 +1,6 @@
 export default class Api {
   constructor(options) {
-    this._url = options.url;
+    this._url = options.baseUrl;
     this._headers = options.headers;
   }
 
@@ -52,7 +52,7 @@ export default class Api {
   }
 
   unlikeCard() {
-    fetch(`${this._url}/cards/likes/${cardID}`, {
+    return fetch(`${this._url}/cards/likes/${cardID}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._processResponse);
