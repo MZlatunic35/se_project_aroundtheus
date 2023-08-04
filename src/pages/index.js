@@ -36,6 +36,8 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 // API
 // =============================================================================
 
+let userID;
+
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -172,6 +174,17 @@ const editFormValidator = new FormValidator(
   profileEditForm
 );
 
+const validationSettings = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input-error",
+  errorClass: "modal__input-error_visible",
+};
+
+const avatarEditModal = document.querySelector("#edit-avatar-modal");
+const avatarEditForm = avatarEditModal.querySelector(".modal__form");
+
 const editAvatarValidator = new FormValidator(
   validationSettings,
   avatarEditForm
@@ -242,8 +255,6 @@ const deleteCardPopup = new PopupWithConfirmation("#delele-card-modal");
 // Profile Avatar
 // =============================================================================
 
-const avatarEditModal = document.querySelector("#edit-avatar-modal");
-const avatarEditForm = avatarEditModal.querySelector(".modal__form");
 const avatarEditButton = document.querySelector(".profile__image-overlay");
 const profileAvatar = document.querySelector("#profile-avatar");
 const avatarEditFormButton = avatarEditModal.querySelector(".modal__button");
