@@ -12,12 +12,13 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
+      method: "GET",
       headers: this._headers,
     }).then(this._processResponse);
   }
 
   editProfile(inputValues) {
-    return fetch(`${this._url}/users.me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
