@@ -6,7 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import {
-  initialCards,
+  // initialCards,
   profileEditButton,
   profileAddButton,
   profileEditModal,
@@ -46,23 +46,18 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([user, initialCards]) => {
+const userInfo = new UserInfo(profileTitle, profileDescription);
+
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+  ([user, initialCards]) => {
     userInfo.setUserInfo({ name: user.name, about: user.about });
     userID = user._id;
 
     const cardList = new Section(
       {
         items: initialCards,
-        renderer: ({ name, link, likes, _id, userId, owner }) => {
-          const newCard = createCard({
-            name,
-            link,
-            likes,
-            _id,
-            userId,
-            owner,
-          });
+        renderer: (data) => {
+          const newCard = createCard(data);
           cardListSection.addItem(newCard);
         },
       },
@@ -70,30 +65,29 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     );
 
     cardList.renderItems();
-  })
-  .catch((err) => console.error(err));
+  }
+);
+// .catch((err) => console.error(err));
 
-api
-  .getUserInfo()
-  .then((result) => {
-    userInfo.setUserInfo({ name: result.name, about: result.about });
-    userID = user._id;
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+api.getUserInfo().then((result) => {
+  userInfo.setUserInfo({ name: result.name, about: result.about });
+  userID = user._id;
+});
+// .catch((err) => {
+//   console.error(err);
+// });
 
 // =============================================================================
 // New Card
 // =============================================================================
 
-function createCard({ name, link }) {
+function createCard(data) {
   const cardElement = new Card(
-    { name, link },
+    data,
     "#card-template",
     userID,
-    ({ name, link }) => {
-      previewImagePopup.open({ name, link }, (cardID) => {
+    (data) => {
+      previewImagePopup.open(data, (cardID) => {
         deleteCardPopup.setSubmitAction(() => {
           api
             .deleteCard(cardID)
@@ -209,19 +203,19 @@ export { previewImage, previewFooter, previewImageModal };
 // Section
 // =============================================================================
 
-const cardListSelector = ".cards__list";
-const cardListSection = new Section(
-  {
-    items: initialCards,
-    renderer: ({ name, link }) => {
-      const newCard = createCard({ name, link });
-      cardListSection.addItem(newCard);
-    },
-  },
-  cardListSelector
-);
+// const cardListSelector = ".cards__list";
+// const cardListSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: ({ name, link }) => {
+//       const newCard = createCard({ name, link });
+//       cardListSection.addItem(newCard);
+//     },
+//   },
+//   cardListSelector
+// );
 
-cardListSection.renderItems();
+// cardListSection.renderItems();
 
 // =============================================================================
 // Add Card Popup
@@ -259,7 +253,7 @@ profileAddButton.addEventListener("click", () => {
 // Delete Card Popup
 // =============================================================================
 
-const deleteCardPopup = new PopupWithConfirmation("#delele-card-modal");
+const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
 
 // =============================================================================
 // Profile Avatar

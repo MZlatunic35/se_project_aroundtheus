@@ -1,5 +1,5 @@
 export default class UserInfo {
-  constructor(nameSelector, professionSelector) {
+  constructor({ nameSelector, professionSelector }) {
     this._name = document.querySelector(nameSelector);
     this._profession = document.querySelector(professionSelector);
   }
@@ -9,7 +9,7 @@ export default class UserInfo {
       profession: this._profession.textContent,
     };
   }
-  setUserInfo(name, profession) {
+  setUserInfo({ name, profession }) {
     this._name.textContent = name;
     this._profession.textContent = profession;
   }
