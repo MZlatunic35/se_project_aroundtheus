@@ -54,7 +54,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     const cardList = new Section(
       {
         items: initialCards,
-        renderer: renderCard,
+        renderer: ({ name, link, likes, _id, userId, owner }) => {
+          const newCard = createCard({
+            name,
+            link,
+            likes,
+            _id,
+            userId,
+            owner,
+          });
+          cardListSection.addItem(newCard);
+        },
       },
       ".card__list"
     );
