@@ -46,7 +46,11 @@ const api = new Api({
   },
 });
 
-const userInfo = new UserInfo(profileTitle, profileDescription);
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  professionSelector: ".profile__description",
+  avatarSelector: ".profile__image",
+});
 
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
