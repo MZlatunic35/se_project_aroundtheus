@@ -52,10 +52,27 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__image",
 });
 
+function handleAvatarFormSubmit({ avatarUrl }) {
+  avatarProfilePopup.renderLoading(true);
+  api
+    .avatarUser(avatarUrl)
+    .then((userData) => {
+      userInfo.setAvatarInfo(userData.avatar);
+      avatarProfilePopup.close();
+    })
+    .catch((err) => {
+      console.err(err);
+    })
+    .finally(() => {
+      avatarProfilePopup.renderLoading(false);
+    });
+}
+
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
-    userInfo.setUserInfo({ name: user.name, about: user.about });
+    userInfo.setUserInfo({ name: user.name, profession: user.profession });
     userID = user._id;
+    userInfo.setAvatarInfo(cardData.avatar);
 
     const cardList = new Section(
       {
@@ -73,10 +90,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
 );
 // .catch((err) => console.error(err));
 
-api.getUserInfo().then((result) => {
-  userInfo.setUserInfo({ name: result.name, about: result.about });
-  userID = user._id;
-});
+// api.getUserInfo().then((result) => {
+//   userInfo.setUserInfo({ name: result.name, profession: result.profession });
+// });
 // .catch((err) => {
 //   console.error(err);
 // });
@@ -203,6 +219,16 @@ editAvatarValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
+const avatarProfilePopup = new PopupWithForm(
+  "#avatar-edit-modal",
+  handleAvatarFormSubmit
+);
+avatarProfilePopup.setEventListeners();
+avatarProfileButton.addEventListener("click", () => {
+  avatarFormValidator.resetValidation();
+  avatarProfilePopup.open();
+});
+
 // =============================================================================
 // Section
 // =============================================================================
@@ -257,7 +283,11 @@ profileAddButton.addEventListener("click", () => {
 // Delete Card Popup
 // =============================================================================
 
-const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
+const deleteCardPopup = new PopupWithConfirmation(
+  "#delete-card-modal",
+  "Deleting..."
+);
+deleteCardPopup.setEventListeners();
 
 // =============================================================================
 // Profile Avatar

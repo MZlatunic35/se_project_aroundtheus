@@ -27,13 +27,13 @@ export default class Api {
       }),
     }).then(this._processResponse);
   }
-  addNewCard(cardData) {
+  addNewCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: cardData.name,
-        link: cardData.link,
+        name,
+        link,
       }),
     }).then(this._processResponse);
   }
@@ -45,14 +45,14 @@ export default class Api {
     }).then(this._processResponse);
   }
 
-  likeCard() {
+  likeCard(cardID) {
     return fetch(`${this._url}/cards/likes/${cardID}`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._processResponse);
   }
 
-  unlikeCard() {
+  unlikeCard(cardID) {
     return fetch(`${this._url}/cards/likes/${cardID}`, {
       method: "DELETE",
       headers: this._headers,
