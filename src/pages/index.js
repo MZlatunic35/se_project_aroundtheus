@@ -72,7 +72,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
     userInfo.setUserInfo({ name: user.name, profession: user.profession });
     userID = user._id;
-    userInfo.setAvatarInfo(cardData.avatar);
+    userInfo.setAvatarInfo(user.avatar);
 
     const cardList = new Section(
       {
@@ -122,8 +122,8 @@ function createCard(data) {
     (cardID) => {
       api
         .likeCard(cardID)
-        .then((cardData) => {
-          card.updateCardLike(cardData.likes);
+        .then((user) => {
+          card.updateCardLike(user.likes);
         })
         .catch((err) => console.error(err));
     }
@@ -131,8 +131,8 @@ function createCard(data) {
   (cardID) => {
     api
       .unlikeCard(cardID)
-      .then((cardData) => {
-        card.updateCardLike(cardData.likes);
+      .then((user) => {
+        card.updateCardLike(user.likes);
       })
       .catch((err) => console.error(err));
   };
@@ -260,7 +260,7 @@ const addCardPopup = new PopupWithForm({
     cardListSection.prependItem(newCard);
     addCardPopup.showLoading();
     api
-      .addNewCard(cardData)
+      .addNewCard(user)
       .then((card) => {
         renderCard(card);
         addCardPopup.close();
