@@ -158,10 +158,9 @@ function handleProfileEditSubmit({ title, description }) {
   profilePopup.close();
 }
 
-const profilePopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit,
-  (inputValues) => {
+const profilePopup = new PopupWithForm({
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit: (inputValues) => {
     profileEditPopup.showLoading();
     api.editProfile(inputValues);
     api
@@ -174,8 +173,8 @@ const profilePopup = new PopupWithForm(
         profileEditPopup.hideLoading();
       });
   },
-  "Saving..."
-);
+  loadingButtonText: "Saving...",
+});
 
 profilePopup.setEventListener();
 
@@ -219,15 +218,18 @@ editAvatarValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
-const avatarProfilePopup = new PopupWithForm(
-  "#avatar-edit-modal",
-  handleAvatarFormSubmit
-);
-avatarProfilePopup.setEventListeners();
-avatarProfileButton.addEventListener("click", () => {
-  avatarFormValidator.resetValidation();
-  avatarProfilePopup.open();
+const avatarProfilePopup = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleFormSubmit: handleAvatarFormSubmit,
 });
+
+// const avatarProfileButton = document.querySelector(".profile-edit-button");
+
+// avatarProfilePopup.setEventListeners();
+// avatarProfileButton.addEventListener("click", () => {
+//   avatarFormValidator.resetValidation();
+//   avatarProfilePopup.open();
+// });
 
 // =============================================================================
 // Section
@@ -251,9 +253,9 @@ avatarProfileButton.addEventListener("click", () => {
 // Add Card Popup
 // =============================================================================
 
-const addCardPopup = new PopupWithForm(
-  "#add-card-modal",
-  (inputValues) => {
+const addCardPopup = new PopupWithForm({
+  popupSelector: "#add-card-modal",
+  handleFormSubmit: (inputValues) => {
     const newCard = createCard(inputValues, cardListEl);
     cardListSection.prependItem(newCard);
     addCardPopup.showLoading();
@@ -268,8 +270,8 @@ const addCardPopup = new PopupWithForm(
         addCardPopup.hideLoading();
       });
   },
-  "Saving..."
-);
+  loadingButtonText: "Saving...",
+});
 
 addCardPopup.close();
 addCardPopup.setEventListener();
@@ -297,9 +299,9 @@ const avatarEditButton = document.querySelector(".profile__image-overlay");
 const profileAvatar = document.querySelector("#profile-avatar");
 const avatarEditFormButton = avatarEditModal.querySelector(".modal__button");
 
-const editAvatarPopup = new PopupWithForm(
-  "#edit-avatar-modal",
-  (inputValues) => {
+const editAvatarPopup = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleFormSubmit: (inputValues) => {
     editAvatarPopup.showLoading();
     api
       .then(() => {
@@ -311,8 +313,8 @@ const editAvatarPopup = new PopupWithForm(
         editAvatarPopup.hideLoading();
       });
   },
-  "Saving..."
-);
+  loadingButtonText: "Saving...",
+});
 
 avatarEditButton.addEventListener("click", () => {
   editAvatarValidator.disableButton();

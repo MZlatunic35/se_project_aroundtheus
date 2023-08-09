@@ -77,32 +77,6 @@
   margin-right: 24px;
 }
 
-.profile__image-overlay {
-  position: absolute;
-  opacity: 0;
-  height: 120px;
-  width: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 0.25s;
-}
-
-.profile__image-edit-icon {
-  width: 26px;
-  height: 26px;
-}
-
-.profile__image-overlay:hover {
-  opacity: 1;
-}
-
-.profile__image:hover {
-  cursor: pointer;
-  opacity: 0.6;
-}
-
 @media screen and (max-width: 880px) {
   .profile {
     flex-direction: column;

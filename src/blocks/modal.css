@@ -154,26 +154,6 @@
   margin-bottom: 30px;
 }
 
-.modal__button-delete {
-  padding: 0;
-  margin-top: 14px;
-  width: 358px;
-  background-color: #000;
-  border-radius: 2px;
-  border: none;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.2;
-  height: 50px;
-  color: #fff;
-}
-
-.modal__button-delete:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
 @media screen and (max-width: 620px) {
   .modal__close {
     width: 26px;
