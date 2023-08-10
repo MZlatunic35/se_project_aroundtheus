@@ -151,7 +151,7 @@ previewImagePopup.setEventListeners();
 // Profile Popup
 // =============================================================================
 
-const newUser = new UserInfo(".profile__title", ".profile__description");
+// const newUser = new UserInfo(".profile__title", ".profile__description");
 
 function handleProfileEditSubmit({ title, description }) {
   newUser.setUserInfo(title, description);
@@ -161,16 +161,16 @@ function handleProfileEditSubmit({ title, description }) {
 const profilePopup = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: (inputValues) => {
-    profileEditPopup.showLoading();
-    api.editProfile(inputValues);
+    profilePopup.showLoading();
     api
+      .editProfile(inputValues)
       .then(() => {
         userInfo.setUserInfo(inputValues);
-        profileEditPopup.close();
+        profilePopup.close();
       })
       .catch((err) => console.error(err))
       .finally(() => {
-        profileEditPopup.hideLoading();
+        profilePopup.hideLoading();
       });
   },
   loadingButtonText: "Saving...",
@@ -179,7 +179,7 @@ const profilePopup = new PopupWithForm({
 profilePopup.setEventListener();
 
 profileEditButton.addEventListener("click", () => {
-  const userData = newUser.getUserInfo();
+  const userData = userInfo.getUserInfo();
   modalTitleInput.value = userData.name;
   modalDescriptionInput.value = userData.profession;
   profilePopup.open();
