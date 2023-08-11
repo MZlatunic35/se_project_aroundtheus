@@ -37,6 +37,7 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 // =============================================================================
 
 let userID;
+let cardList;
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -77,12 +78,19 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
     const cardList = new Section(
       {
         items: initialCards,
-        renderer: (data) => {
-          const newCard = createCard(data);
-          cardListSection.addItem(newCard);
+        renderer: ({ name, link, isLiked, _id, userId, ownerId }) => {
+          const newCard = createCard({
+            name,
+            link,
+            isLiked,
+            _id,
+            userId,
+            ownerId,
+          });
+          cardList.addItem(newCard);
         },
       },
-      ".card__list"
+      ".cards__list"
     );
 
     cardList.renderItems();
@@ -101,22 +109,25 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
 // New Card
 // =============================================================================
 
-function createCard(data) {
+function createCard({ name, link, isLiked, _id, userId, ownerId }) {
   const cardElement = new Card(
-    data,
+    { name, link, isLiked, _id, userId, ownerId },
     userID,
     "#card-template",
-    (data) => {
-      previewImagePopup.open(data, (cardID) => {
-        deleteCardPopup.setSubmitAction(() => {
-          api
-            .deleteCard(cardID)
-            .then(() => {
-              card.removeCard(), deleteCardPopup.close();
-            })
-            .catch((err) => console.error(err));
-        });
-      });
+    ({ name, link, isLiked, _id, userId, ownerId }) => {
+      previewImagePopup.open(
+        { name, link, isLiked, _id, userId, ownerId },
+        (cardID) => {
+          deleteCardPopup.setSubmitAction(() => {
+            api
+              .deleteCard(cardID)
+              .then(() => {
+                card.removeCard(), deleteCardPopup.close();
+              })
+              .catch((err) => console.error(err));
+          });
+        }
+      );
       deleteCardPopup.open();
     },
     (cardID) => {
@@ -256,13 +267,12 @@ const avatarProfilePopup = new PopupWithForm({
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
   handleFormSubmit: (inputValues) => {
-    const newCard = createCard(inputValues, cardListEl);
-    cardListSection.prependItem(newCard);
     addCardPopup.showLoading();
     api
-      .addNewCard(user)
+      .addNewCard(inputValues)
       .then((card) => {
-        renderCard(card);
+        const newCard = createCard(card);
+        cardList.prependItem(newCard);
         addCardPopup.close();
       })
       .catch((err) => console.error(err))

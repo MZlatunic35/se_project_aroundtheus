@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { name, link, likes, _id, userId, ownerId },
+    { name, link, isLiked, _id, userId, ownerId },
     myId,
     cardSelector,
     handleCardClick,
@@ -9,7 +9,7 @@ export default class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._likes = likes;
+    this._likes = isLiked;
     this._id = _id;
     this._userId = userId;
     this._ownerId = ownerId;
@@ -32,21 +32,13 @@ export default class Card {
     return data;
   }
 
-  isLiked() {
-    return this._likes.some((like) => {
-      return like._id === this._myId;
-    });
-  }
-
   setLikes(likes) {
     this._likes = likes;
     this._renderLikes();
   }
 
   _renderLikes() {
-    this._cardElement.querySelector(".card__like-counter").textContent =
-      this._likes.length;
-    if (this.isLiked()) {
+    if (this._likes) {
       this._cardElement
         .querySelector(".card__like-button")
         .classList.add("card__like-button_active");
