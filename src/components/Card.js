@@ -11,9 +11,9 @@ export default class Card {
     this._link = link;
     this._likes = likes;
     this._id = _id;
-    this._myId = myId;
     this._userId = userId;
     this._ownerId = ownerId;
+    this._myId = myId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
