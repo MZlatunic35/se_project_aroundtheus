@@ -70,7 +70,7 @@ function handleAvatarFormSubmit({ avatarUrl }) {
 
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
-    userInfo.setUserInfo({ name: user.name, profession: user.profession });
+    userInfo.setUserInfo({ title: user.title, description: user.description });
     userID = user._id;
     userInfo.setAvatarInfo(user.avatar);
 
@@ -104,8 +104,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
 function createCard(data) {
   const cardElement = new Card(
     data,
-    "#card-template",
     userID,
+    "#card-template",
     (data) => {
       previewImagePopup.open(data, (cardID) => {
         deleteCardPopup.setSubmitAction(() => {
@@ -180,8 +180,8 @@ profilePopup.setEventListener();
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
-  modalTitleInput.value = userData.name;
-  modalDescriptionInput.value = userData.profession;
+  modalTitleInput.value = userData.title;
+  modalDescriptionInput.value = userData.description;
   profilePopup.open();
 });
 
@@ -317,6 +317,6 @@ const editAvatarPopup = new PopupWithForm({
 });
 
 avatarEditButton.addEventListener("click", () => {
-  editAvatarValidator.disableButton();
+  editAvatarValidator.resetValidation();
   editAvatarPopup.open();
 });

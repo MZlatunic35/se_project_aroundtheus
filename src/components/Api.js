@@ -22,8 +22,8 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: inputValues.name,
-        about: inputValues.profession,
+        name: inputValues.title,
+        about: inputValues.description,
       }),
     }).then(this._processResponse);
   }
