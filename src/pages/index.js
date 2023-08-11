@@ -75,7 +75,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
     userID = user._id;
     userInfo.setAvatarInfo(user.avatar);
 
-    const cardList = new Section(
+    cardList = new Section(
       {
         items: initialCards,
         renderer: ({ name, link, isLiked, _id, userId, ownerId }) => {
@@ -117,36 +117,50 @@ function createCard({ name, link, isLiked, _id, userId, ownerId }) {
     ({ name, link, isLiked, _id, userId, ownerId }) => {
       previewImagePopup.open(
         { name, link, isLiked, _id, userId, ownerId },
-        (cardID) => {
-          deleteCardPopup.setSubmitAction(() => {
-            api
-              .deleteCard(cardID)
-              .then(() => {
-                card.removeCard(), deleteCardPopup.close();
-              })
-              .catch((err) => console.error(err));
-          });
+        function handleDeleteClick() {
+          deleteCardPopup
+            .setSubmitAction(() => {
+              deleteCardPopup.setLoading(true);
+              api
+                .deleteCard()
+                .then((res) => {
+                  newCard.removeCard(res), deleteCardPopup.close();
+                })
+                .catch((err) => console.error(err));
+            })
+            .finally(() => {
+              deleteCardPopup.setLoading(false, "Yes");
+            });
         }
       );
       deleteCardPopup.open();
     },
-    (cardID) => {
+    function handleLikeClick() {
+      const newCard = createCard({
+        name,
+        link,
+        isLiked,
+        _id,
+        userId,
+        ownerId,
+      });
       api
-        .likeCard(cardID)
-        .then((user) => {
-          card.updateCardLike(user.likes);
+        .likeCard(newCard.isLiked)
+        .then((res) => {
+          const likes = res.likes || [];
+          newCard.setLikes(likes);
         })
         .catch((err) => console.error(err));
     }
   );
-  (cardID) => {
-    api
-      .unlikeCard(cardID)
-      .then((user) => {
-        card.updateCardLike(user.likes);
-      })
-      .catch((err) => console.error(err));
-  };
+  // (cardID) => {
+  //   api
+  //     .unlikeCard(cardID)
+  //     .then((user) => {
+  //       card.updateCardLike(user.likes);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
   return cardElement.getView();
 }
 // =============================================================================
