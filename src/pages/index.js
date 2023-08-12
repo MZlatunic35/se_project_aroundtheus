@@ -109,58 +109,56 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
 // New Card
 // =============================================================================
 
+function handleLikeClick() {
+  if ((this, isLiked)) {
+    api
+      .unlikeCard(this._id)
+      .then((res) => {
+        newCard.showLikes(res.likes);
+      })
+      .catch((error) => {
+        console.log(`An error has occured ${error}`);
+      });
+  } else {
+    api
+      .likeCard(this._id)
+      .then((res) => {
+        const likes = res.likes || [];
+        newCard.setLikes(likes);
+      })
+      .catch((err) => console.error(err));
+  }
+}
+
+function handleCardClick(data) {
+  previewImagePopup.open(data);
+}
+
+function handleDeleteClick() {
+  deleteCardPopup.open();
+  deleteCardPopup.setSubmitAction(() => {
+    deleteCardPopup.setLoading(true);
+    api
+      .deleteCard()
+      .then((res) => {
+        newCard.removeCard(res), deleteCardPopup.close();
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        deleteCardPopup.setLoading(false, "Yes");
+      });
+  });
+}
+
 function createCard({ name, link, isLiked, _id, userId, ownerId }) {
   const cardElement = new Card(
     { name, link, isLiked, _id, userId, ownerId },
     userID,
     "#card-template",
-    ({ name, link, isLiked, _id, userId, ownerId }) => {
-      previewImagePopup.open(
-        { name, link, isLiked, _id, userId, ownerId },
-        function handleLikeClick() {
-          const newCard = createCard({
-            name,
-            link,
-            isLiked,
-            _id,
-            userId,
-            ownerId,
-          });
-          api
-            .likeCard(newCard.isLiked)
-            .then((res) => {
-              const likes = res.likes || [];
-              newCard.setLikes(likes);
-            })
-            .catch((err) => console.error(err));
-        },
-        function handleDeleteClick() {
-          deleteCardPopup
-            .setSubmitAction(() => {
-              deleteCardPopup.setLoading(true);
-              api
-                .deleteCard()
-                .then((res) => {
-                  newCard.removeCard(res), deleteCardPopup.close();
-                })
-                .catch((err) => console.error(err));
-            })
-            .finally(() => {
-              deleteCardPopup.setLoading(false, "Yes");
-            });
-        }
-      );
-      deleteCardPopup.open();
-    }
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick
   );
-  // (cardID) => {
-  //   api
-  //     .unlikeCard(cardID)
-  //     .then((user) => {
-  //       card.updateCardLike(user.likes);
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
   return cardElement.getView();
 }
 // =============================================================================

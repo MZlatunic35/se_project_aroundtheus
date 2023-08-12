@@ -87,6 +87,10 @@
   margin: 0 0 54px 0;
 }
 
+.modal__heading-confirm {
+  margin-bottom: 20px;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -120,6 +124,10 @@
   transition: 0.3s ease-in-out;
   border: none;
   margin-top: 18px;
+}
+
+.modal__button-confirm {
+  width: 358px;
 }
 
 .modal__button:disabled {
@@ -183,6 +191,10 @@
   }
 
   .modal__form {
+    width: 238px;
+  }
+
+  .modal__button-confirm {
     width: 238px;
   }
 

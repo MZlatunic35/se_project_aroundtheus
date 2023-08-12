@@ -25,11 +25,10 @@ export default class Card {
   }
 
   _getData() {
-    const data = {
+    return {
       name: this._name,
       link: this._link,
     };
-    return data;
   }
 
   setLikes(likes) {
@@ -72,10 +71,6 @@ export default class Card {
     });
     this._hideDeleteButton();
   }
-
-  // _handleLikeIcon() {
-  //   this._handleLikeClick({ _id: this._id, isLiked: this._likes });
-  // }
 
   remove() {
     this._cardElement.remove();
