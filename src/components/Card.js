@@ -62,8 +62,7 @@ export default class Card {
     const deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
     );
-    deleteButton.addEventListener("click", (e) => {
-      e.preventDefault();
+    deleteButton.addEventListener("click", () => {
       this._handleDeleteClick();
     });
 

@@ -117,6 +117,23 @@ function createCard({ name, link, isLiked, _id, userId, ownerId }) {
     ({ name, link, isLiked, _id, userId, ownerId }) => {
       previewImagePopup.open(
         { name, link, isLiked, _id, userId, ownerId },
+        function handleLikeClick() {
+          const newCard = createCard({
+            name,
+            link,
+            isLiked,
+            _id,
+            userId,
+            ownerId,
+          });
+          api
+            .likeCard(newCard.isLiked)
+            .then((res) => {
+              const likes = res.likes || [];
+              newCard.setLikes(likes);
+            })
+            .catch((err) => console.error(err));
+        },
         function handleDeleteClick() {
           deleteCardPopup
             .setSubmitAction(() => {
@@ -134,23 +151,6 @@ function createCard({ name, link, isLiked, _id, userId, ownerId }) {
         }
       );
       deleteCardPopup.open();
-    },
-    function handleLikeClick() {
-      const newCard = createCard({
-        name,
-        link,
-        isLiked,
-        _id,
-        userId,
-        ownerId,
-      });
-      api
-        .likeCard(newCard.isLiked)
-        .then((res) => {
-          const likes = res.likes || [];
-          newCard.setLikes(likes);
-        })
-        .catch((err) => console.error(err));
     }
   );
   // (cardID) => {
@@ -169,6 +169,7 @@ function createCard({ name, link, isLiked, _id, userId, ownerId }) {
 
 const previewImagePopup = new PopupWithImage({
   popupSelector: "#preview-modal",
+  handleFormSubmit: handleProfileEditSubmit,
 });
 previewImagePopup.setEventListeners();
 
