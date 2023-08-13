@@ -31,8 +31,8 @@ export default class Card {
     };
   }
 
-  setLikes(likes) {
-    this._likes = likes;
+  setLikes(isLiked) {
+    this._likes = isLiked;
     this._renderLikes();
   }
 
@@ -56,7 +56,7 @@ export default class Card {
 
   _setEventListeners() {
     const likeButton = this._cardElement.querySelector(".card__like-button");
-    likeButton.addEventListener("click", () => this._renderLikes());
+    likeButton.addEventListener("click", () => this._handleLikeClick());
 
     const deleteButton = this._cardElement.querySelector(
       ".card__delete-button"

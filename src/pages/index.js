@@ -53,22 +53,6 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__image",
 });
 
-function handleAvatarFormSubmit({ avatarUrl }) {
-  avatarProfilePopup.renderLoading(true);
-  api
-    .avatarUser(avatarUrl)
-    .then((userData) => {
-      userInfo.setAvatarInfo(userData.avatar);
-      avatarProfilePopup.close();
-    })
-    .catch((err) => {
-      console.err(err);
-    })
-    .finally(() => {
-      avatarProfilePopup.renderLoading(false);
-    });
-}
-
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
     userInfo.setUserInfo({ title: user.title, description: user.description });
@@ -101,11 +85,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
 // =============================================================================
 
 function handleLikeClick() {
-  if ((this, isLiked)) {
+  if (this._likes) {
     api
       .unlikeCard(this._id)
       .then((res) => {
-        newCard.showLikes(res.likes);
+        newCard.setLikes(res.isLiked);
       })
       .catch((error) => {
         console.log(`An error has occured ${error}`);
@@ -114,8 +98,7 @@ function handleLikeClick() {
     api
       .likeCard(this._id)
       .then((res) => {
-        const likes = res.likes || [];
-        newCard.setLikes(likes);
+        newCard.setLikes(res.iLiked);
       })
       .catch((err) => console.error(err));
   }
@@ -169,8 +152,6 @@ previewImagePopup.setEventListeners();
 // =============================================================================
 // Profile Popup
 // =============================================================================
-
-// const newUser = new UserInfo(".profile__title", ".profile__description");
 
 function handleProfileEditSubmit({ title, description }) {
   newUser.setUserInfo(title, description);
@@ -237,37 +218,6 @@ editAvatarValidator.enableValidation();
 
 export { previewImage, previewFooter, previewImageModal };
 
-const avatarProfilePopup = new PopupWithForm({
-  popupSelector: "#edit-avatar-modal",
-  handleFormSubmit: handleAvatarFormSubmit,
-});
-
-// const avatarProfileButton = document.querySelector(".profile-edit-button");
-
-// avatarProfilePopup.setEventListeners();
-// avatarProfileButton.addEventListener("click", () => {
-//   avatarFormValidator.resetValidation();
-//   avatarProfilePopup.open();
-// });
-
-// =============================================================================
-// Section
-// =============================================================================
-
-// const cardListSelector = ".cards__list";
-// const cardListSection = new Section(
-//   {
-//     items: initialCards,
-//     renderer: ({ name, link }) => {
-//       const newCard = createCard({ name, link });
-//       cardListSection.addItem(newCard);
-//     },
-//   },
-//   cardListSelector
-// );
-
-// cardListSection.renderItems();
-
 // =============================================================================
 // Add Card Popup
 // =============================================================================
@@ -300,16 +250,33 @@ profileAddButton.addEventListener("click", () => {
 });
 
 // =============================================================================
-// Delete Card Popup
-// =============================================================================
-
-// =============================================================================
 // Profile Avatar
 // =============================================================================
+
+function handleAvatarFormSubmit({ avatarUrl }) {
+  avatarProfilePopup.renderLoading(true);
+  api
+    .avatarUser(avatarUrl)
+    .then((userData) => {
+      userInfo.setAvatarInfo(userData.avatar);
+      avatarProfilePopup.close();
+    })
+    .catch((err) => {
+      console.err(err);
+    })
+    .finally(() => {
+      avatarProfilePopup.renderLoading(false);
+    });
+}
 
 const avatarEditButton = document.querySelector(".profile__image-overlay");
 const profileAvatar = document.querySelector("#profile-avatar");
 const avatarEditFormButton = avatarEditModal.querySelector(".modal__button");
+
+const avatarProfilePopup = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleFormSubmit: handleAvatarFormSubmit,
+});
 
 const editAvatarPopup = new PopupWithForm({
   popupSelector: "#edit-avatar-modal",

@@ -113,6 +113,10 @@
   border-bottom: 1px solid #ff0000;
 }
 
+.modal__input_type_url {
+  margin-bottom: 32px;
+}
+
 .modal__button {
   font-size: 18px;
   line-height: 22px;
