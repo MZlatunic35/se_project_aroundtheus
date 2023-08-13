@@ -96,15 +96,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
     cardList.renderItems();
   }
 );
-// .catch((err) => console.error(err));
-
-// api.getUserInfo().then((result) => {
-//   userInfo.setUserInfo({ name: result.name, profession: result.profession });
-// });
-// .catch((err) => {
-//   console.error(err);
-// });
-
 // =============================================================================
 // New Card
 // =============================================================================
@@ -134,14 +125,18 @@ function handleCardClick(data) {
   previewImagePopup.open(data);
 }
 
-function handleDeleteClick() {
+const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
+deleteCardPopup.setEventListeners();
+
+function handleDeleteClick(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
     deleteCardPopup.setLoading(true);
     api
-      .deleteCard()
-      .then((res) => {
-        newCard.removeCard(res), deleteCardPopup.close();
+      .deleteCard(card.getId())
+      .then(() => {
+        card.remove();
+        deleteCardPopup.close();
       })
       .catch((err) => console.error(err))
       .finally(() => {
@@ -307,12 +302,6 @@ profileAddButton.addEventListener("click", () => {
 // =============================================================================
 // Delete Card Popup
 // =============================================================================
-
-const deleteCardPopup = new PopupWithConfirmation(
-  "#delete-card-modal",
-  "Deleting..."
-);
-deleteCardPopup.setEventListeners();
 
 // =============================================================================
 // Profile Avatar
