@@ -5,7 +5,8 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}/users/me`, {
+      method: "GET",
       headers: this._headers,
     }).then(this._processResponse);
   }
@@ -27,6 +28,7 @@ export default class Api {
       }),
     }).then(this._processResponse);
   }
+
   addNewCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: "POST",

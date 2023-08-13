@@ -197,19 +197,11 @@ const editFormValidator = new FormValidator(
   profileEditForm
 );
 
-const validationSettings = {
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input-error",
-  errorClass: "modal__input-error_visible",
-};
-
 const avatarEditModal = document.querySelector("#edit-avatar-modal");
 const avatarEditForm = avatarEditModal.querySelector(".modal__form");
 
 const editAvatarValidator = new FormValidator(
-  validationSettings,
+  formValidationConfig,
   avatarEditForm
 );
 
@@ -253,36 +245,15 @@ profileAddButton.addEventListener("click", () => {
 // Profile Avatar
 // =============================================================================
 
-function handleAvatarFormSubmit({ avatarUrl }) {
-  avatarProfilePopup.renderLoading(true);
-  api
-    .avatarUser(avatarUrl)
-    .then((userData) => {
-      userInfo.setAvatarInfo(userData.avatar);
-      avatarProfilePopup.close();
-    })
-    .catch((err) => {
-      console.err(err);
-    })
-    .finally(() => {
-      avatarProfilePopup.renderLoading(false);
-    });
-}
-
 const avatarEditButton = document.querySelector(".profile__image-overlay");
 const profileAvatar = document.querySelector("#profile-avatar");
-const avatarEditFormButton = avatarEditModal.querySelector(".modal__button");
-
-const avatarProfilePopup = new PopupWithForm({
-  popupSelector: "#edit-avatar-modal",
-  handleFormSubmit: handleAvatarFormSubmit,
-});
 
 const editAvatarPopup = new PopupWithForm({
   popupSelector: "#edit-avatar-modal",
   handleFormSubmit: (inputValues) => {
     editAvatarPopup.showLoading();
-    api
+    api;
+    updateProfilePicture(inputValues)
       .then(() => {
         profileAvatar.src = inputValues.link;
         editAvatarPopup.close();
@@ -294,6 +265,9 @@ const editAvatarPopup = new PopupWithForm({
   },
   loadingButtonText: "Saving...",
 });
+
+editAvatarPopup.close();
+editAvatarPopup.setEventListener();
 
 avatarEditButton.addEventListener("click", () => {
   editAvatarValidator.resetValidation();
