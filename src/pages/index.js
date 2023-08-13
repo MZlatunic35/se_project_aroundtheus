@@ -55,7 +55,7 @@ const userInfo = new UserInfo({
 
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
-    userInfo.setUserInfo({ title: user.title, description: user.description });
+    userInfo.setUserInfo(user);
     userID = user._id;
     userInfo.setAvatarInfo(user.avatar);
 
@@ -252,8 +252,8 @@ const editAvatarPopup = new PopupWithForm({
   popupSelector: "#edit-avatar-modal",
   handleFormSubmit: (inputValues) => {
     editAvatarPopup.showLoading();
-    api;
-    updateProfilePicture(inputValues)
+    api
+      .updateProfilePicture(inputValues)
       .then(() => {
         profileAvatar.src = inputValues.link;
         editAvatarPopup.close();
