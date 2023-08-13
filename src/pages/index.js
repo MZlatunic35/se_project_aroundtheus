@@ -89,7 +89,7 @@ function handleLikeClick() {
     api
       .unlikeCard(this._id)
       .then((res) => {
-        newCard.setLikes(res.isLiked);
+        this.setLikes(res.isLiked);
       })
       .catch((error) => {
         console.log(`An error has occured ${error}`);
@@ -98,7 +98,7 @@ function handleLikeClick() {
     api
       .likeCard(this._id)
       .then((res) => {
-        newCard.setLikes(res.iLiked);
+        this.setLikes(res.iLiked);
       })
       .catch((err) => console.error(err));
   }
@@ -153,8 +153,8 @@ previewImagePopup.setEventListeners();
 // Profile Popup
 // =============================================================================
 
-function handleProfileEditSubmit({ title, description }) {
-  newUser.setUserInfo(title, description);
+function handleProfileEditSubmit({ name, about }) {
+  newUser.setUserInfo(name, about);
   profilePopup.close();
 }
 
@@ -180,8 +180,8 @@ profilePopup.setEventListener();
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
-  modalTitleInput.value = userData.title;
-  modalDescriptionInput.value = userData.description;
+  modalTitleInput.value = userData.name;
+  modalDescriptionInput.value = userData.about;
   profilePopup.open();
 });
 
