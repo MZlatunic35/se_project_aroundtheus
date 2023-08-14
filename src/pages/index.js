@@ -57,7 +57,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
     userInfo.setUserInfo(user);
     userID = user._id;
-    userInfo.setUserInfo(user.avatar);
+    userInfo.setUserInfo(user);
 
     cardList = new Section(
       {
