@@ -98,7 +98,7 @@ function handleLikeClick() {
     api
       .likeCard(this._id)
       .then((res) => {
-        this.setLikes(res.iLiked);
+        this.setLikes(res.isLiked);
       })
       .catch((err) => console.error(err));
   }
@@ -255,7 +255,7 @@ const editAvatarPopup = new PopupWithForm({
     api
       .updateProfilePicture(inputValues)
       .then(() => {
-        profileAvatar.src = inputValues.link;
+        userInfo.setUserInfo(inputValues);
         editAvatarPopup.close();
       })
       .catch((err) => console.error(err))

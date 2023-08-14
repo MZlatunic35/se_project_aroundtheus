@@ -23,8 +23,8 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: inputValues.title,
-        about: inputValues.description,
+        name: inputValues.name,
+        about: inputValues.about,
       }),
     }).then(this._processResponse);
   }
@@ -64,7 +64,7 @@ export default class Api {
   updateProfilePicture(inputValues) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._header,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: inputValues.link,
       }),
