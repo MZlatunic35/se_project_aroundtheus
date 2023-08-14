@@ -1,44 +1,43 @@
-# Practicum Project 3 - 7: Around The U.S.
+# Practicum Project Around The U.S.
 
 This is a project from Practicum of the Web Development program. It was created using HTML, CSS and JavaScript based on the Figma design layout. The web page is responsive, so it has been designed for both desktop and mobile devices. Photos have been optimized using "TinyPng" (https://tinypng.com/).
 
-- Project 3
-  The GRID layout is introduced which is setting the fundation for the improvement for this project. Also the interactive setup to dislpay the website on all version of technologies.
+## Screeshot
 
-- Project 4
-  The basic of JavaScript was implemented to the website (Array of of Data, Modalboxes and DOM).
+Home Page
+![Around the U.S. Home Page](./src/images/home-page.png "Home Page")
 
-- Project 5
-  Contiunes to improve the DOM and newly introduced JavaScript functions.
+Edit Profile Modal
+![Edit Profile Modal](./src/images/edit-profile.png "Edit Profile Modal")
 
-- Sprint 6
-  Objects and Event Handlers/Listener newly added to the website.
+Create new Card
+![Create new Card](./src/images/create-new-card.png "Create new Card")
 
-- Sprint 7
-  Introduction of Object-oriented Programming to the website which is cleaning up the JavaScript code.
+Change Profile Picture
+![Change Profile Picture](./src/images/change-profile-picture.png "Change Profile Picture")
 
-## Pictures
-
-![Design preview for Desktop](./images/full_screen.png)
-![Design preview for Validation](./images/validation_error.png)
-![Design preview for Mobile](./images/mobile_screen.png)
+Delete Card
+![Delete Card](./src/images/delete-card.png "Delete Card")
 
 ## Figma
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Link to the project on Figma](https://www.figma.com/file/E5x6ib3osaUUNwLRRAsTDX/Sprint-9-%E2%80%94-Applied-JavaScript?node-id=1530%3A2&mode=dev)
 
-- Use of media queries for all elements to display properly on different screen resolutions
+## Technologies
+
+- HTML
+- CSS
+- Figma
 - BEM
-- Use of psuedo-classes to for hover over functions
-- DOM (Document Object Model)
-- Event Handling
-- Form Validation
-- Object-oriented Programming (Encapsulation, Inheritance, Polymorphism)
-
-## Plan on improving the project
-
-Implemeting advanced object-oriented programming by destructuring the syntax and building the project with a Webpack.
+- JavaScript
+- Git
+- JSON
+- Webpack
+- GitHub
+- Fetch API
 
 # GitHub Page
 
 - [Link to the Github Page](https://mirkozlatunic.github.io/se_project_aroundtheus/)
+
+**Created By [Mirko Zlatunic](https://github.com/mirkozlatunic)**
