@@ -33,7 +33,7 @@ import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 // =============================================================================
-// API
+// API + userInfo
 // =============================================================================
 
 let userID;
@@ -57,7 +57,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([user, initialCards]) => {
     userInfo.setUserInfo(user);
     userID = user._id;
-    userInfo.setAvatarInfo(user.avatar);
+    userInfo.setUserInfo(user.avatar);
 
     cardList = new Section(
       {
@@ -81,7 +81,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   }
 );
 // =============================================================================
-// New Card
+// Handle Clicks
 // =============================================================================
 
 function handleLikeClick() {
@@ -254,8 +254,8 @@ const editAvatarPopup = new PopupWithForm({
     editAvatarPopup.showLoading();
     api
       .updateProfilePicture(inputValues)
-      .then(() => {
-        userInfo.setUserInfo(inputValues);
+      .then((res) => {
+        userInfo.setUserInfo(res);
         editAvatarPopup.close();
       })
       .catch((err) => console.error(err))
