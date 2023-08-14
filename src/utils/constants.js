@@ -55,6 +55,8 @@ export const cardTitleInput = addCardForm.querySelector(
 export const cardUrlInput = addCardForm.querySelector(".modal__input_type_url");
 export const previewImage = document.querySelector(".modal__preview-image");
 export const previewFooter = document.querySelector(".modal__preview-footer");
+const deleteCardModal = document.querySelector("#delete-card-modal");
+export const deleteCardForm = deleteCardModal.querySelector(".modal__form");
 
 export const formValidationConfig = {
   inputSelector: ".modal__input",
