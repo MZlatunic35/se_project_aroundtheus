@@ -53,8 +53,8 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__image",
 });
 
-Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
-  ([user, initialCards]) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, initialCards]) => {
     userInfo.setUserInfo(user);
     userID = user._id;
     userInfo.setUserInfo(user);
@@ -76,31 +76,29 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
       },
       ".cards__list"
     );
-
     cardList.renderItems();
-  }
-);
+  })
+  .catch(console.error);
+
 // =============================================================================
 // Handle Clicks
 // =============================================================================
 
-function handleLikeClick() {
-  if (this._likes) {
+function handleLikeClick(cardInstance) {
+  if (cardInstance._likes) {
     api
-      .unlikeCard(this._id)
+      .unlikeCard(cardInstance._id)
       .then((res) => {
-        this.setLikes(res.isLiked);
+        cardInstance.setLikes(res.isLiked);
       })
-      .catch((error) => {
-        console.log(`An error has occured ${error}`);
-      });
+      .catch(console.error);
   } else {
     api
-      .likeCard(this._id)
+      .likeCard(cardInstance._id)
       .then((res) => {
-        this.setLikes(res.isLiked);
+        cardInstance.setLikes(res.isLiked);
       })
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }
 }
 
@@ -121,7 +119,7 @@ function handleDeleteClick(card) {
         card.remove();
         deleteCardPopup.close();
       })
-      .catch((err) => console.error(err))
+      .catch(console.error)
       .finally(() => {
         deleteCardPopup.setLoading(false, "Yes");
       });
@@ -168,7 +166,7 @@ const profilePopup = new PopupWithForm({
         userInfo.setUserInfo(inputValues);
         profilePopup.close();
       })
-      .catch((err) => console.error(err))
+      .catch(console.error)
       .finally(() => {
         profilePopup.hideLoading();
       });
@@ -225,7 +223,7 @@ const addCardPopup = new PopupWithForm({
         cardList.prependItem(newCard);
         addCardPopup.close();
       })
-      .catch((err) => console.error(err))
+      .catch(console.error)
       .finally(() => {
         addCardPopup.hideLoading();
       });
@@ -258,7 +256,7 @@ const editAvatarPopup = new PopupWithForm({
         userInfo.setUserInfo(res);
         editAvatarPopup.close();
       })
-      .catch((err) => console.error(err))
+      .catch(console.error)
       .finally(() => {
         editAvatarPopup.hideLoading();
       });

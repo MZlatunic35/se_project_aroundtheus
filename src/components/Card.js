@@ -56,7 +56,7 @@ export default class Card {
 
   _setEventListeners() {
     const likeButton = this._cardElement.querySelector(".card__like-button");
-    likeButton.addEventListener("click", () => this._handleLikeClick());
+    likeButton.addEventListener("click", () => this._handleLikeClick(this));
 
     const deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
