@@ -40,14 +40,15 @@
   justify-content: center;
   align-items: center;
   row-gap: 10px;
-  background-color: transparent;
+  background-color: #fff;
   padding: 0;
-  color: #fff;
+  color: #000;
 }
 
 .modal__preview-image {
   max-width: 75vw;
   max-height: 75vh;
+  border-radius: 10px 10px 0 0;
 }
 
 .modal__preview-footer {
@@ -57,6 +58,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
+  margin: 0 10px 10px;
 }
 
 .modal__close {
