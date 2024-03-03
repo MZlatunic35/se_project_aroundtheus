@@ -42,6 +42,6 @@ Delete Card
 
 **Created By [Mirko Zlatunic](https://github.com/mirkozlatunic)**
 
-##Improvements
+## Improvements
 
 - [x] Preview Image Footer adapt to same as Card for more visibility
