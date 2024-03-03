@@ -36,8 +36,12 @@ Delete Card
 - GitHub
 - Fetch API
 
-# GitHub Page
+## GitHub Page
 
 - [Link to the Github Page](https://mirkozlatunic.github.io/se_project_aroundtheus/)
 
 **Created By [Mirko Zlatunic](https://github.com/mirkozlatunic)**
+
+##Improvements
+
+- [x] Preview Image Footer adapt to same as Card for more visibility
